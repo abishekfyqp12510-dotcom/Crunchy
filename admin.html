@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Canteen · Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#5c1a00">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="admin">
+
+<header class="top">
+  <a class="brand" href="admin.html"><img src="assets/icon-512.png" alt="Crunchy logo">Smart Canteen</a>
+  <span id="greet" class="greet"></span>
+  <button id="logout" class="ghost" hidden>Log out</button>
+</header>
+
+<main>
+  <section id="auth" class="auth" hidden>
+    <form id="auth-form" class="panel">
+      <h2>Canteen admin</h2>
+      <input type="hidden" name="mode" value="login">
+      <input name="email" type="email" placeholder="Admin email" required>
+      <input name="password" type="password" placeholder="Password" required>
+      <button type="submit">Log in</button>
+    </form>
+  </section>
+
+  <section id="denied" class="auth" hidden>
+    <p class="panel">This account does not have admin access.</p>
+  </section>
+
+  <section id="app" hidden>
+    <nav class="tabs">
+      <button data-tab="orders" class="on">Live orders</button>
+      <button data-tab="menu">Menu</button>
+      <button data-tab="sales">Sales</button>
+    </nav>
+
+    <div data-view="orders" class="stack" id="orders-section">
+      <div id="orders-list" class="stack"></div>
+    </div>
+
+    <div data-view="menu" hidden>
+      <form id="add-item" class="panel add-form">
+        <h2>Add item</h2>
+        <input name="name" placeholder="Name" required>
+        <input name="description" placeholder="Description">
+        <input name="price" type="number" min="0" step="0.5" placeholder="Price ₹" required>
+        <input name="stock" type="number" min="0" placeholder="Stock" required>
+        <select name="category">
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="snack">Snack</option>
+        </select>
+        <input name="menu_date" type="date" title="Leave empty for today">
+        <input name="image_url" type="url" placeholder="Image URL (optional)">
+        <button type="submit" class="primary">Add to menu</button>
+      </form>
+      <div id="menu-admin" class="table-wrap"></div>
+    </div>
+
+    <div data-view="sales" hidden>
+      <div id="stats" class="stats"></div>
+      <button id="export-csv" class="primary">Download sales report (CSV)</button>
+    </div>
+  </section>
+</main>
+
+<div id="toast" class="toast" hidden role="status"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

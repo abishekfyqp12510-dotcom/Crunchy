@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Canteen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#5c1a00">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="student">
+
+<header class="top">
+  <a class="brand" href="index.html"><img src="assets/icon-512.png" alt="Crunchy logo">Smart Canteen</a>
+  <span id="greet" class="greet"></span>
+  <button id="logout" class="ghost" hidden>Log out</button>
+</header>
+
+<main>
+  <!-- Login / signup -->
+  <section id="auth" class="auth" hidden>
+    <form id="auth-form" class="panel">
+      <h2>Order ahead, skip the queue</h2>
+      <select id="mode" name="mode">
+        <option value="login">Log in</option>
+        <option value="signup">Create account</option>
+      </select>
+      <input name="email" type="email" placeholder="College email" required>
+      <input name="password" type="password" minlength="6" placeholder="Password" required>
+      <div class="signup-only" hidden>
+        <input name="name" placeholder="Full name">
+        <input name="student_id" placeholder="Student ID">
+        <input name="department" placeholder="Department">
+      </div>
+      <button type="submit">Continue</button>
+    </form>
+  </section>
+
+  <!-- Main app -->
+  <section id="app" hidden>
+    <nav class="tabs">
+      <button data-tab="menu" class="on">Menu</button>
+      <button data-tab="orders">My orders</button>
+    </nav>
+
+    <div data-view="menu" class="menu-layout">
+      <div>
+        <div class="filters">
+          <input id="search" type="search" placeholder="Search food">
+          <div class="chips">
+            <button data-cat="all" class="on">All</button>
+            <button data-cat="breakfast">Breakfast</button>
+            <button data-cat="lunch">Lunch</button>
+            <button data-cat="snack">Snacks</button>
+          </div>
+        </div>
+        <div id="menu" class="grid"></div>
+      </div>
+
+      <aside class="cart">
+        <h2>Your order</h2>
+        <ul id="cart-lines"></ul>
+        <div class="row total"><span>Total</span><strong id="cart-total">₹0.00</strong></div>
+        <label>Pickup time
+          <input id="pickup" type="datetime-local">
+        </label>
+        <button id="place" class="primary" disabled>Place order</button>
+      </aside>
+    </div>
+
+    <div data-view="orders" hidden>
+      <div id="orders-list" class="stack"></div>
+    </div>
+  </section>
+
+  <section id="denied" class="auth" hidden>
+    <p class="panel">This account is not an administrator. Use the student page instead.</p>
+  </section>
+</main>
+
+<div id="toast" class="toast" hidden role="status"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
